@@ -194,7 +194,7 @@
     </div>
 
     <header>
-        <h1>Taryfikator-EMS</h1>
+        <h1>Taryfikator-MedWest Hospital</h1>
         <div style="font-size:0.85rem; margin-top:5px; color: var(--primary-blue);">CENTRAL BILLING SYSTEM | Hospital MedWest</div>
     </header>
 
@@ -402,10 +402,28 @@
     </div>
         </details> 
 
-    <div class="billing-summary">
-        <h2 style="margin:0; font-family: 'Orbitron';">SUMA: <span id="total-amount">$0.00</span></h2>
-        <button class="btn-action" onclick="generateInvoice()">GENERUJ RACHUNEK</button>
+    <<div class="billing-summary">
+
+    <h2 style="margin:0; font-family: 'Orbitron';">
+        WARTOŚĆ USŁUG:
+        <span id="total-amount">$0.00</span>
+    </h2>
+
+    <div style="margin-top:10px;font-size:1rem;">
+        Pokrycie ubezpieczenia:
+        <span id="insurance-discount">$0.00</span>
     </div>
+
+    <div style="margin-top:5px;font-size:1.2rem;font-weight:bold;color:#00ff88;">
+        Do zapłaty:
+        <span id="final-amount">$0.00</span>
+    </div>
+
+    <button class="btn-action" onclick="generateInvoice()">
+        GENERUJ RACHUNEK
+    </button>
+
+</div>
 
     <footer>Hospital MedWest BILLING SYSTEM // Taryfikator 2026</footer>
 </div>
@@ -691,11 +709,141 @@ localStorage.setItem('lastInvoice', JSON.stringify({
     }
 
     setInterval(() => {
-        let t = 0;
-        document.querySelectorAll('.calc-check').forEach(i => { if(i.checked) t += parseFloat(i.closest('tr').dataset.price); });
-        document.querySelectorAll('.calc-qty').forEach(i => { t += (parseInt(i.value)||0) * parseFloat(i.closest('tr').dataset.price); });
-        document.getElementById('total-amount').innerText = '$' + t.toLocaleString('en-US', {minimumFractionDigits: 2});
-    }, 400);
+
+    let subtotal = 0;
+    let discount = 0;
+
+    const insuranceType =
+        document.getElementById('insurance-type').value;
+
+    document.querySelectorAll('.calc-check').forEach(i => {
+
+        if(!i.checked) return;
+
+        const r = i.closest('tr');
+        const id = r.dataset.id || "";
+        const price = parseFloat(r.dataset.price);
+
+        subtotal += price;
+
+        // PODSTAWOWE
+        if (insuranceType === "basic") {
+            if (
+                id.startsWith("t") ||
+                id === "d1" ||
+                id === "d2" ||
+                id === "d3" ||
+                id === "l1" ||
+                id === "l2" ||
+                id === "l3"
+            ) {
+                discount += price * 0.40;
+            }
+        }
+
+        // ROZSZERZONE
+        if (insuranceType === "extended") {
+            if (
+                id.startsWith("t") ||
+                id.startsWith("d") ||
+                id.startsWith("p") ||
+                id.startsWith("l")
+            ) {
+                discount += price * 0.60;
+            }
+        }
+
+        // ZAAWANSOWANE
+        if (insuranceType === "advanced") {
+            if (
+                id.startsWith("t") ||
+                id.startsWith("d") ||
+                id.startsWith("p") ||
+                id.startsWith("l") ||
+                id.startsWith("ps") ||
+                (id.startsWith("o") && parseInt(id.replace("o","")) >= 101)
+            ) {
+                discount += price * 0.80;
+            }
+
+            if (id.startsWith("c")) {
+                discount += price * 0.50;
+            }
+        }
+
+    });
+
+    document.querySelectorAll('.calc-qty').forEach(i => {
+
+        const q = parseInt(i.value) || 0;
+
+        if(q <= 0) return;
+
+        const r = i.closest('tr');
+        const id = r.dataset.id || "";
+        const price = parseFloat(r.dataset.price) * q;
+
+        subtotal += price;
+
+        // PODSTAWOWE
+        if (insuranceType === "basic") {
+            if (
+                id.startsWith("t") ||
+                id === "d1" ||
+                id === "d2" ||
+                id === "d3" ||
+                id === "l1" ||
+                id === "l2" ||
+                id === "l3"
+            ) {
+                discount += price * 0.40;
+            }
+        }
+
+        // ROZSZERZONE
+        if (insuranceType === "extended") {
+            if (
+                id.startsWith("t") ||
+                id.startsWith("d") ||
+                id.startsWith("p") ||
+                id.startsWith("l")
+            ) {
+                discount += price * 0.60;
+            }
+        }
+
+        // ZAAWANSOWANE
+        if (insuranceType === "advanced") {
+            if (
+                id.startsWith("t") ||
+                id.startsWith("d") ||
+                id.startsWith("p") ||
+                id.startsWith("l") ||
+                id.startsWith("ps") ||
+                (id.startsWith("o") && parseInt(id.replace("o","")) >= 101)
+            ) {
+                discount += price * 0.80;
+            }
+
+            if (id.startsWith("c")) {
+                discount += price * 0.50;
+            }
+        }
+
+    });
+
+    const finalAmount = subtotal - discount;
+
+    document.getElementById('total-amount').innerText =
+        '$' + subtotal.toFixed(2);
+
+    document.getElementById('insurance-discount').innerText =
+        '$' + discount.toFixed(2);
+
+    document.getElementById('final-amount').innerText =
+        '$' + finalAmount.toFixed(2);
+
+}, 400);
 </script>
 </body>
 </html>
