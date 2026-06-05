@@ -59,6 +59,10 @@
         <strong>DATA:</strong> <span id="inv-date"></span><br>
         <strong>PACJENT:</strong> <span id="inv-patient"></span>
     </div>
+    <div style="margin-bottom: 20px; font-size: 0.9rem;">
+    <strong>UBEZPIECZENIE:</strong> <span id="inv-insurance"></span><br>
+    <strong>NUMER POLISY:</strong> <span id="inv-policy"></span>
+</div>
 
     <table>
         <thead>
@@ -70,7 +74,19 @@
         <tbody id="inv-items"></tbody>
     </table>
 
-    <div class="total">RAZEM: $<span id="inv-total"></span></div>
+    <div style="margin-top:20px;">
+    <div style="text-align:right; font-size:1rem;">
+        WARTOŚĆ USŁUG: $<span id="inv-subtotal"></span>
+    </div>
+
+    <div style="text-align:right; font-size:1rem; color:green;">
+        POKRYCIE UBEZPIECZENIA: -$<span id="inv-discount"></span>
+    </div>
+
+    <div class="total">
+        DO ZAPŁATY: $<span id="inv-total"></span>
+    </div>
+</div>
 
     <div class="footer">
         <div style="display:flex; justify-content:space-between; align-items: flex-end;">
