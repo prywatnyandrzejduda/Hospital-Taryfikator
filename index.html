@@ -577,7 +577,9 @@
     function generateInvoice() {
         let total = 0; let items = [];
         const patient = document.getElementById('patient-name').value || "NIEZNANY";
-        const ems = document.getElementById('ems-name').value || "DYŻURNY RATOWNIK";
+        const ems = document.getElementById('ems-name').value || "DYŻURNY LEKARZ";
+        const insuranceType = document.getElementById('insurance-type').value;
+const insuranceId = document.getElementById('insurance-id').value || "BRAK";
 
         document.querySelectorAll('.calc-check').forEach(i => {
             if(i.checked) {
@@ -597,9 +599,37 @@
             }
         });
 
-        localStorage.setItem('lastInvoice', JSON.stringify({
-            patient: patient, ems: ems, total: total.toFixed(2), items: items, date: new Date().toLocaleString()
-        }));
+        let subtotal = total;
+let discount = 0;
+
+if (insuranceType === "basic") {
+    discount = subtotal * 0.40;
+}
+
+if (insuranceType === "extended") {
+    discount = subtotal * 0.60;
+}
+
+if (insuranceType === "advanced") {
+    discount = subtotal * 0.80;
+}
+
+let finalTotal = subtotal - discount;
+
+localStorage.setItem('lastInvoice', JSON.stringify({
+    patient: patient,
+    ems: ems,
+
+    insuranceType: insuranceType,
+    insuranceId: insuranceId,
+
+    subtotal: subtotal.toFixed(2),
+    discount: discount.toFixed(2),
+    total: finalTotal.toFixed(2),
+
+    items: items,
+    date: new Date().toLocaleString()
+}));
         window.location.href = 'rachunek.html';
     }
 
