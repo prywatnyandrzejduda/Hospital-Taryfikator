@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>MedWest Hospital - Centrum</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --primary-blue:#00d4ff;
+    --dark-blue:#0a192f;
+    --card-bg:rgba(16,33,65,0.9);
+    --text-light:#e6f1ff;
+}
+
+body{
+    font-family:'Roboto',sans-serif;
+    background:linear-gradient(135deg,#020c1b 0%,#0a192f 100%);
+    color:var(--text-light);
+    margin:0;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:700px;
+    max-width:90%;
+    text-align:center;
+
+    background:var(--card-bg);
+    padding:50px;
+    border-radius:15px;
+
+    border:1px solid rgba(0,212,255,0.3);
+
+    box-shadow:0 20px 50px rgba(0,0,0,0.8);
+}
+
+h1{
+    font-family:'Orbitron',sans-serif;
+    color:var(--primary-blue);
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#8fb8d9;
+    margin-bottom:40px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.menu-btn{
+    display:block;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(0,212,255,0.3);
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    font-size:1.2rem;
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.menu-btn:hover{
+    transform:translateY(-3px);
+
+    border-color:#00d4ff;
+
+    box-shadow:0 0 20px rgba(0,212,255,0.4);
+}
+
+.footer{
+    margin-top:40px;
+
+    font-size:0.75rem;
+
+    color:rgba(255,255,255,0.4);
+
+    letter-spacing:1px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🏥 MEDWEST</h1>
+
+    <div class="subtitle">
+        CENTRAL MANAGEMENT SYSTEM
+    </div>
+
+    <div class="menu">
+
+        <a href="index.html" class="menu-btn">
+            📊 TARYFIKATOR
+        </a>
+
+        <a href="recepta.html" class="menu-btn">
+            💊 RECEPTY
+        </a>
+
+        <a href="raport.html" class="menu-btn">
+            📋 RAPORTY
+        </a>
+
+    </div>
+
+    <div class="footer">
+        MEDWEST HOSPITAL MANAGEMENT SYSTEM v1.0
+    </div>
+
+</div>
+
+</body>
+</html>
