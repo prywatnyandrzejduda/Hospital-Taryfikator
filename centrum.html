@@ -101,11 +101,21 @@ h1{
      <img src="obraz_2026-05-02_212208153.png"
      style="width:120px; margin-bottom:20px; border-radius:10px; border:1px solid #00d4ff;">
 
-<h1>🏥 MEDWEST</h1>
+<h1>🏥 MEDWEST HOSPITAL</h1>
 
 <div class="subtitle">
     CENTRAL MANAGEMENT SYSTEM
 </div>
+    <script>
+function updateClock() {
+    document.getElementById('current-time').innerText =
+        new Date().toLocaleString('pl-PL');
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+</body>
 
 <div id="current-time"
      style="margin-bottom:25px;color:#8fb8d9;font-size:0.9rem;">
