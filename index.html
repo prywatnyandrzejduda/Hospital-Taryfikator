@@ -198,19 +198,39 @@
         <div style="font-size:0.85rem; margin-top:5px; color: var(--primary-blue);">CENTRAL BILLING SYSTEM | Hospital MedWest</div>
     </header>
 
-    <div class="section-card">
-        <div class="section-header">INFORMACJE O ZGŁOSZENIU</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div>
-                <label style="font-size: 0.8rem; opacity: 0.8;">Pacjent (Imię i Nazwisko):</label><br>
-                <input type="text" id="patient-name" class="data-input" placeholder="Wprowadź dane...">
-            </div>
-            <div>
-                <label style="font-size: 0.8rem; opacity: 0.8;">Podpis Lekarza:</label><br>
-                <input type="text" id="ems-name" class="data-input" placeholder="Twoje imię i stopień...">
-            </div>
+   <div class="section-card">
+    <div class="section-header">INFORMACJE O ZGŁOSZENIU</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+        <div>
+            <label style="font-size: 0.8rem; opacity: 0.8;">Pacjent (Imię i Nazwisko):</label><br>
+            <input type="text" id="patient-name" class="data-input" placeholder="Wprowadź dane...">
         </div>
+
+        <div>
+            <label style="font-size: 0.8rem; opacity: 0.8;">Podpis Lekarza:</label><br>
+            <input type="text" id="ems-name" class="data-input" placeholder="Twoje imię i stopień...">
+        </div>
+
+        <div>
+            <label style="font-size: 0.8rem; opacity: 0.8;">Typ Ubezpieczenia:</label><br>
+
+            <select id="insurance-type" class="data-input">
+                <option value="none">Brak Ubezpieczenia</option>
+                <option value="basic">Podstawowe (40%)</option>
+                <option value="extended">Rozszerzone (60%)</option>
+                <option value="advanced">Zaawansowane (80%)</option>
+            </select>
+        </div>
+
+        <div>
+            <label style="font-size: 0.8rem; opacity: 0.8;">Numer Polisy:</label><br>
+            <input type="text" id="insurance-id" class="data-input" placeholder="MW-00000">
+        </div>
+
     </div>
+</div>
 <details>
     <summary>TRANSPORT </summary>
     <div class="section-card">
