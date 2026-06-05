@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedWest Hospital - Recepty</title>
 
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#1f4e79;
+}
+
+label{
+    display:block;
+    margin-top:12px;
+    font-weight:bold;
+}
+
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    box-sizing:border-box;
+}
+
+textarea{
+    resize:vertical;
+}
+
+button{
+    margin-top:15px;
+    padding:10px 15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.generate{
+    background:#1f4e79;
+    color:white;
+}
+
+.copy{
+    background:#28a745;
+    color:white;
+}
+
+.back{
+    background:#6c757d;
+    color:white;
+}
+
+#recepta{
+    margin-top:30px;
+    padding:20px;
+    border:2px solid #ddd;
+    border-radius:10px;
+    background:#fafafa;
+    white-space:pre-line;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏥 MEDWEST HOSPITAL - RECEPTA</h1>
+
+<label>Pacjent</label>
+<input type="text" id="pacjent">
+
+<label>Numer polisy (opcjonalnie)</label>
+<input type="text" id="polisa">
+
+<label>Lekarz</label>
+<input type="text" id="lekarz">
+
+<label>Lek</label>
+<input type="text" id="lek">
+
+<label>Dawkowanie</label>
+<input type="text" id="dawkowanie">
+
+<label>Czas terapii</label>
+<input type="text" id="terapia">
+
+<label>Zalecenia</label>
+<textarea id="zalecenia" rows="4"></textarea>
+
+<button class="generate" onclick="generujRecepte()">📄 Generuj receptę</button>
+<button class="copy" onclick="kopiuj()">📸 Kopiuj do Discorda</button>
+<button class="back" onclick="window.location.href='centrum.html'">← Powrót do Centrum</button>
+
+<div id="recepta"></div>
+
+</div>
+
+<script>
+let licznik = 1;
+
+function generujNumerRecepty() {
+    const dzis = new Date();
+
+    const rok = dzis.getFullYear();
+    const miesiac = String(dzis.getMonth() + 1).padStart(2,'0');
+    const dzien = String(dzis.getDate()).padStart(2,'0');
+
+    const numer = String(licznik).padStart(3,'0');
+
+    licznik++;
+
+    return `RX-${rok}${miesiac}${dzien}-${numer}`;
+}
+
+function generujRecepte(){
+
+    const pacjent = document.getElementById("pacjent").value;
+    const polisa = document.getElementById("polisa").value;
+    const lekarz = document.getElementById("lekarz").value;
+    const lek = document.getElementById("lek").value;
+    const dawkowanie = document.getElementById("dawkowanie").value;
+    const terapia = document.getElementById("terapia").value;
+    const zalecenia = document.getElementById("zalecenia").value;
+
+    const data = new Date().toLocaleDateString('pl-PL');
+    const numerRecepty = generujNumerRecepty();
+
+    let wynik =
+`🏥 MEDWEST HOSPITAL
+
+RECEPTA MEDYCZNA
+
+Numer recepty: ${numerRecepty}
+Data wystawienia: ${data}
+
+Pacjent: ${pacjent}`;
+
+    if(polisa.trim() !== ""){
+        wynik += `\nNumer polisy: ${polisa}`;
+    }
+
+    wynik += `
+
+Lekarz: ${lekarz}
+
+Lek: ${lek}
+Dawkowanie: ${dawkowanie}
+Czas terapii: ${terapia}
+
+Zalecenia:
+${zalecenia}
+
+Podpis lekarza:
+${lekarz}
+
+MedWest Hospital`;
+
+    document.getElementById("recepta").innerText = wynik;
+}
+
+function kopiuj(){
+
+    const tekst = document.getElementById("recepta").innerText;
+
+    if(!tekst){
+        alert("Najpierw wygeneruj receptę!");
+        return;
+    }
+
+    navigator.clipboard.writeText(tekst);
+
+    alert("Recepta została skopiowana!");
+}
+</script>
+
+</body>
+</html>
