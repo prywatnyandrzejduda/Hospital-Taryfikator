@@ -590,7 +590,12 @@ const insuranceId = document.getElementById('insurance-id').value || "BRAK";
             if(i.checked) {
                 let r = i.closest('tr');
                 total += parseFloat(r.dataset.price);
-                items.push({name: r.dataset.name, price: r.dataset.price, qty: 1});
+               items.push({
+    id: r.dataset.id,
+    name: r.dataset.name,
+    price: r.dataset.price,
+    qty: 1
+});
             }
         });
 
@@ -600,7 +605,12 @@ const insuranceId = document.getElementById('insurance-id').value || "BRAK";
                 let r = i.closest('tr');
                 let p = q * parseFloat(r.dataset.price);
                 total += p;
-                items.push({name: r.dataset.name, price: p.toFixed(2), qty: q});
+               items.push({
+    id: r.dataset.id,
+    name: r.dataset.name,
+    price: p.toFixed(2),
+    qty: q
+});
             }
         });
 
@@ -609,7 +619,7 @@ let discount = 0;
 
 items.forEach(item => {
 
-    const id = item.id;
+const id = item.id || "";
     const price = parseFloat(item.price);
 
     // UBEZPIECZENIE PODSTAWOWE
