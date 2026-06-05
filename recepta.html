@@ -3,80 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MedWest Hospital - Recepty</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
 <style>
+:root{
+    --primary-blue:#00d4ff;
+    --dark-blue:#0a192f;
+    --card-bg:rgba(16,33,65,0.9);
+    --text-light:#e6f1ff;
+}
+
 body{
-    font-family: Arial, sans-serif;
-    background:#f4f6f9;
+    font-family:'Roboto',sans-serif;
+    background:linear-gradient(135deg,#020c1b 0%,#0a192f 100%);
+    color:var(--text-light);
     margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     padding:20px;
 }
 
 .container{
-    max-width:800px;
-    margin:auto;
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 0 15px rgba(0,0,0,0.1);
+    width:900px;
+    max-width:95%;
+    text-align:center;
+    background:var(--card-bg);
+    padding:40px;
+    border-radius:15px;
+    border:1px solid rgba(0,212,255,0.3);
+    box-shadow:0 20px 50px rgba(0,0,0,0.8);
 }
 
 h1{
-    text-align:center;
-    color:#1f4e79;
+    font-family:'Orbitron',sans-serif;
+    color:var(--primary-blue);
+    font-size:2.5rem;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#8fb8d9;
+    margin-bottom:25px;
+}
+
+#current-time{
+    color:#8fb8d9;
+    margin-bottom:25px;
+}
+
+.form-group{
+    text-align:left;
+    margin-bottom:15px;
 }
 
 label{
     display:block;
-    margin-top:12px;
+    margin-bottom:6px;
+    color:#8fb8d9;
     font-weight:bold;
 }
 
 input, textarea{
     width:100%;
-    padding:10px;
-    margin-top:5px;
-    border:1px solid #ccc;
-    border-radius:6px;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid rgba(0,212,255,0.3);
+    background:rgba(255,255,255,0.05);
+    color:white;
     box-sizing:border-box;
 }
 
 textarea{
+    min-height:100px;
     resize:vertical;
 }
 
-button{
-    margin-top:15px;
-    padding:10px 15px;
-    border:none;
-    border-radius:6px;
+.buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:25px;
+}
+
+.btn{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(0,212,255,0.3);
+    color:white;
+    padding:15px 25px;
+    border-radius:10px;
     cursor:pointer;
-    font-size:15px;
+    font-weight:bold;
+    transition:0.3s;
+    text-decoration:none;
 }
 
-.generate{
-    background:#1f4e79;
-    color:white;
-}
-
-.copy{
-    background:#28a745;
-    color:white;
-}
-
-.back{
-    background:#6c757d;
-    color:white;
+.btn:hover{
+    transform:translateY(-3px);
+    border-color:#00d4ff;
+    box-shadow:0 0 20px rgba(0,212,255,0.4);
 }
 
 #recepta{
     margin-top:30px;
-    padding:20px;
-    border:2px solid #ddd;
-    border-radius:10px;
-    background:#fafafa;
+    text-align:left;
     white-space:pre-line;
+    padding:20px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(0,212,255,0.3);
+    display:none;
+}
+
+.status{
+    margin-top:25px;
+    padding:10px;
+    border:1px solid #00ff88;
+    border-radius:8px;
+    color:#00ff88;
+}
+
+.footer{
+    margin-top:30px;
+    font-size:0.75rem;
+    color:rgba(255,255,255,0.4);
+    letter-spacing:1px;
 }
 </style>
 </head>
@@ -85,82 +141,120 @@ button{
 
 <div class="container">
 
-<h1>🏥 MEDWEST HOSPITAL - RECEPTA</h1>
+<img src="obraz_2026-05-02_212208153.png"
+style="width:120px; margin-bottom:20px; border-radius:10px; border:1px solid #00d4ff;">
 
+<h1>💊 MEDWEST HOSPITAL</h1>
+
+<div class="subtitle">
+    SYSTEM RECEPT MEDYCZNYCH
+</div>
+
+<div id="current-time"></div>
+
+<div class="form-group">
 <label>Pacjent</label>
 <input type="text" id="pacjent">
+</div>
 
+<div class="form-group">
 <label>Numer polisy (opcjonalnie)</label>
 <input type="text" id="polisa">
+</div>
 
+<div class="form-group">
 <label>Lekarz</label>
 <input type="text" id="lekarz">
+</div>
 
+<div class="form-group">
 <label>Lek</label>
 <input type="text" id="lek">
+</div>
 
+<div class="form-group">
 <label>Dawkowanie</label>
 <input type="text" id="dawkowanie">
+</div>
 
+<div class="form-group">
 <label>Czas terapii</label>
 <input type="text" id="terapia">
+</div>
 
+<div class="form-group">
 <label>Zalecenia</label>
-<textarea id="zalecenia" rows="4"></textarea>
+<textarea id="zalecenia"></textarea>
+</div>
 
-<button class="generate" onclick="generujRecepte()">📄 Generuj receptę</button>
-<button class="copy" onclick="kopiuj()">📸 Kopiuj do Discorda</button>
-<button class="back" onclick="window.location.href='centrum.html'">← Powrót do Centrum</button>
+<div class="buttons">
+<button class="btn" onclick="generujRecepte()">📄 GENERUJ RECEPTĘ</button>
+<button class="btn" onclick="kopiujRecepte()">📸 KOPIUJ DO DISCORDA</button>
+<a href="centrum.html" class="btn">← POWRÓT DO CENTRUM</a>
+</div>
 
 <div id="recepta"></div>
+
+<div class="status">
+🟢 STATUS SYSTEMU: ONLINE
+</div>
+
+<div class="footer">
+MEDWEST HOSPITAL MANAGEMENT SYSTEM v1.0
+</div>
 
 </div>
 
 <script>
-let licznik = 1;
+
+function updateClock() {
+    document.getElementById('current-time').innerText =
+        new Date().toLocaleString('pl-PL');
+}
+
+updateClock();
+setInterval(updateClock, 1000);
 
 function generujNumerRecepty() {
-    const dzis = new Date();
+    const teraz = new Date();
 
-    const rok = dzis.getFullYear();
-    const miesiac = String(dzis.getMonth() + 1).padStart(2,'0');
-    const dzien = String(dzis.getDate()).padStart(2,'0');
+    const rok = teraz.getFullYear();
+    const miesiac = String(teraz.getMonth()+1).padStart(2,'0');
+    const dzien = String(teraz.getDate()).padStart(2,'0');
 
-    const numer = String(licznik).padStart(3,'0');
+    const losowy = Math.floor(Math.random()*900+100);
 
-    licznik++;
-
-    return `RX-${rok}${miesiac}${dzien}-${numer}`;
+    return `RX-${rok}${miesiac}${dzien}-${losowy}`;
 }
 
 function generujRecepte(){
 
-    const pacjent = document.getElementById("pacjent").value;
-    const polisa = document.getElementById("polisa").value;
-    const lekarz = document.getElementById("lekarz").value;
-    const lek = document.getElementById("lek").value;
-    const dawkowanie = document.getElementById("dawkowanie").value;
-    const terapia = document.getElementById("terapia").value;
-    const zalecenia = document.getElementById("zalecenia").value;
-
+    const numer = generujNumerRecepty();
     const data = new Date().toLocaleDateString('pl-PL');
-    const numerRecepty = generujNumerRecepty();
 
-    let wynik =
+    const pacjent = document.getElementById('pacjent').value;
+    const polisa = document.getElementById('polisa').value;
+    const lekarz = document.getElementById('lekarz').value;
+    const lek = document.getElementById('lek').value;
+    const dawkowanie = document.getElementById('dawkowanie').value;
+    const terapia = document.getElementById('terapia').value;
+    const zalecenia = document.getElementById('zalecenia').value;
+
+    let tekst =
 `🏥 MEDWEST HOSPITAL
 
 RECEPTA MEDYCZNA
 
-Numer recepty: ${numerRecepty}
+Numer recepty: ${numer}
 Data wystawienia: ${data}
 
 Pacjent: ${pacjent}`;
 
     if(polisa.trim() !== ""){
-        wynik += `\nNumer polisy: ${polisa}`;
+        tekst += `\nNumer polisy: ${polisa}`;
     }
 
-    wynik += `
+    tekst += `
 
 Lekarz: ${lekarz}
 
@@ -174,24 +268,27 @@ ${zalecenia}
 Podpis lekarza:
 ${lekarz}
 
-MedWest Hospital`;
+━━━━━━━━━━━━━━━━━━━━`;
 
-    document.getElementById("recepta").innerText = wynik;
+    const recepta = document.getElementById('recepta');
+    recepta.style.display = "block";
+    recepta.innerText = tekst;
 }
 
-function kopiuj(){
+function kopiujRecepte(){
 
-    const tekst = document.getElementById("recepta").innerText;
+    const tekst = document.getElementById('recepta').innerText;
 
     if(!tekst){
-        alert("Najpierw wygeneruj receptę!");
+        alert("Najpierw wygeneruj receptę.");
         return;
     }
 
     navigator.clipboard.writeText(tekst);
 
-    alert("Recepta została skopiowana!");
+    alert("Recepta została skopiowana.");
 }
+
 </script>
 
 </body>
