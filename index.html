@@ -465,7 +465,12 @@
             if(i.checked) {
                 let r = i.closest('tr');
                 total += parseFloat(r.dataset.price);
-                items.push({name: r.dataset.name, price: r.dataset.price, qty: 1});
+     items.push({
+    id: r.dataset.id,
+    name: r.dataset.name,
+    price: r.dataset.price,
+    qty: 1
+});
             }
         });
 
@@ -599,21 +604,63 @@ const insuranceId = document.getElementById('insurance-id').value || "BRAK";
             }
         });
 
-        let subtotal = total;
+let subtotal = total;
 let discount = 0;
 
-if (insuranceType === "basic") {
-    discount = subtotal * 0.40;
-}
+items.forEach(item => {
 
-if (insuranceType === "extended") {
-    discount = subtotal * 0.60;
-}
+    const id = item.id;
+    const price = parseFloat(item.price);
 
-if (insuranceType === "advanced") {
-    discount = subtotal * 0.80;
-}
+    // UBEZPIECZENIE PODSTAWOWE
+    if (insuranceType === "basic") {
 
+        if (
+            id.startsWith("t") ||
+            id === "d1" ||
+            id === "d2" ||
+            id === "d3" ||
+            id === "l1" ||
+            id === "l2" ||
+            id === "l3"
+        ) {
+            discount += price * 0.40;
+        }
+    }
+
+    // UBEZPIECZENIE ROZSZERZONE
+    if (insuranceType === "extended") {
+
+        if (
+            id.startsWith("t") ||
+            id.startsWith("d") ||
+            id.startsWith("p") ||
+            id.startsWith("l")
+        ) {
+            discount += price * 0.60;
+        }
+    }
+
+    // UBEZPIECZENIE ZAAWANSOWANE
+    if (insuranceType === "advanced") {
+
+        if (
+            id.startsWith("t") ||
+            id.startsWith("d") ||
+            id.startsWith("p") ||
+            id.startsWith("l") ||
+            id.startsWith("ps") ||
+            parseInt(id.replace("o","")) >= 101
+        ) {
+            discount += price * 0.80;
+        }
+
+        if (id.startsWith("c")) {
+            discount += price * 0.50;
+        }
+    }
+
+});
 let finalTotal = subtotal - discount;
 
 localStorage.setItem('lastInvoice', JSON.stringify({
