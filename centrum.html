@@ -3,9 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<img src="obraz_2026-05-02_212208153.png"
+     style="width:120px; margin-bottom:20px; border-radius:10px;">
 <title>MedWest Hospital - Centrum</title>
+<div id="current-time"></div>
 
+<script>
+setInterval(() => {
+    document.getElementById('current-time').innerText =
+        new Date().toLocaleString();
+}, 1000);
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -126,6 +134,14 @@ h1{
         </a>
 
     </div>
+    <div style="
+margin-top:25px;
+padding:10px;
+border:1px solid #00ff88;
+border-radius:8px;
+color:#00ff88;">
+🟢 STATUS SYSTEMU: ONLINE
+</div>
 
     <div class="footer">
         MEDWEST HOSPITAL MANAGEMENT SYSTEM v1.0
