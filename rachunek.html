@@ -59,7 +59,7 @@
         <strong>DATA:</strong> <span id="inv-date"></span><br>
         <strong>PACJENT:</strong> <span id="inv-patient"></span>
     </div>
-    <div style="margin-bottom: 20px; font-size: 0.9rem;">
+  <div style="margin-bottom: 20px; font-size: 0.9rem;">
     <strong>UBEZPIECZENIE:</strong> <span id="inv-insurance"></span><br>
     <strong>NUMER POLISY:</strong> <span id="inv-policy"></span>
 </div>
@@ -110,6 +110,16 @@
     // Ładowanie danych
     const data = JSON.parse(localStorage.getItem('lastInvoice'));
     if(data) {
+        let insuranceName = "Brak";
+
+if(data.insuranceType === "basic") insuranceName = "Podstawowe";
+if(data.insuranceType === "extended") insuranceName = "Rozszerzone";
+if(data.insuranceType === "advanced") insuranceName = "Zaawansowane";
+
+document.getElementById('inv-insurance').innerText = insuranceName;
+document.getElementById('inv-policy').innerText = data.insuranceId || "BRAK";
+document.getElementById('inv-subtotal').innerText = data.subtotal || data.total;
+document.getElementById('inv-discount').innerText = data.discount || "0.00";
         document.getElementById('inv-patient').innerText = data.patient;
         document.getElementById('inv-ems').innerText = data.ems;
         document.getElementById('inv-total').innerText = data.total;
