@@ -156,6 +156,21 @@ body{
 
 <br><br>
 
+<strong>ILOŚĆ:</strong><br>
+<span id="rx-packs"></span> opakowanie(a)
+
+<br><br>
+
+<strong>TYP RECEPTY:</strong><br>
+<span id="rx-priority"></span>
+
+<br><br>
+
+<strong>WAŻNOŚĆ:</strong><br>
+<span id="rx-validity"></span>
+
+<br><br>
+
 <strong>DAWKOWANIE:</strong><br>
 <span id="rx-dosage"></span>
 
@@ -206,7 +221,11 @@ document.getElementById('rx-doctor').innerText = data.doctor;
 
 document.getElementById('rx-sign').innerText = data.doctor;
 
-document.getElementById('rx-medicine').innerText = data.medicine;
+document.getElementById('rx-packs').innerText = data.packs;
+
+document.getElementById('rx-priority').innerText = data.priority;
+
+document.getElementById('rx-validity').innerText = data.validity;
 
 document.getElementById('rx-dosage').innerText = data.dosage;
 
@@ -214,8 +233,10 @@ document.getElementById('rx-duration').innerText = data.duration;
 
 document.getElementById('rx-notes').innerText = data.notes;
 
+const year = new Date().getFullYear();
+
 document.getElementById('rx-id').innerText =
-"RX-" + Math.floor(Math.random() * 900000 + 100000);
+`RX-${year}-${Math.floor(Math.random()*900000+100000)}`;
 
 }
 
