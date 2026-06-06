@@ -210,6 +210,33 @@ textarea{
 
 </select>
 </div>
+    
+<select id="preset-notes" class="data-input"
+        onchange="applyPresetNotes()">
+
+    <option value="">Wybierz zalecenie...</option>
+
+    <option value="Przyjmować po posiłku.">
+        Przyjmować po posiłku
+    </option>
+
+    <option value="Nie spożywać alkoholu podczas terapii.">
+        Zakaz spożywania alkoholu
+    </option>
+
+    <option value="Unikać prowadzenia pojazdów.">
+        Nie prowadzić pojazdów
+    </option>
+
+    <option value="Zgłosić się na kontrolę za 7 dni.">
+        Kontrola za 7 dni
+    </option>
+
+    <option value="Przechowywać poza zasięgiem dzieci.">
+        Chronić przed dziećmi
+    </option>
+
+</select>
 <div class="section">
 <label>Zalecenia</label>
 <textarea id="notes"></textarea>
