@@ -10,7 +10,6 @@
 <style>
 :root{
     --primary-blue:#00d4ff;
-    --dark-blue:#0a192f;
     --card-bg:rgba(16,33,65,0.9);
     --text-light:#e6f1ff;
 }
@@ -24,7 +23,7 @@ body{
 }
 
 .container{
-    max-width:900px;
+    max-width:1000px;
     margin:auto;
     background:var(--card-bg);
     padding:40px;
@@ -33,36 +32,56 @@ body{
     box-shadow:0 20px 50px rgba(0,0,0,0.8);
 }
 
+.logo-container{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.logo-container img{
+    width:90px;
+    border-radius:12px;
+    border:1px solid rgba(0,212,255,0.3);
+    padding:8px;
+}
+
 h1{
     text-align:center;
     font-family:'Orbitron';
     color:var(--primary-blue);
-<div style="text-align:center; margin-bottom:25px;">
-    <img src="obraz_2026-05-02_212208153.png"
-         style="
-         width:90px;
-         border-radius:12px;
-         border:1px solid rgba(0,212,255,0.3);
-         padding:8px;">
-</div> 
-    }
+    margin-bottom:30px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
 .section{
     margin-bottom:20px;
 }
 
-label{
-    display:block;
-    margin-bottom:5px;
+.section.full{
+    grid-column:1 / -1;
 }
 
-input, select, textarea{
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+input,
+select,
+textarea{
     width:100%;
     box-sizing:border-box;
-    padding:10px;
+    padding:12px;
     border-radius:8px;
     border:1px solid var(--primary-blue);
     background:#010813;
     color:white;
+    font-size:14px;
 }
 
 textarea{
@@ -75,32 +94,18 @@ textarea{
     padding:18px;
     border:none;
     border-radius:12px;
-
-    background:linear-gradient(
-        90deg,
-        #00d4ff,
-        #00ff88
-    );
-
+    background:linear-gradient(90deg,#00d4ff,#00ff88);
     color:#020c1b;
-
     font-weight:bold;
-
     font-family:'Orbitron';
-
     cursor:pointer;
-
     font-size:1rem;
-
     transition:0.3s;
-}
-    .btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 20px rgba(0,212,255,0.5);
 }
 
 .btn:hover{
-    opacity:0.9;
+    transform:translateY(-2px);
+    box-shadow:0 0 20px rgba(0,212,255,0.5);
 }
 
 .back-btn{
@@ -112,170 +117,169 @@ textarea{
     padding:10px 15px;
     border-radius:8px;
 }
-    @media (max-width: 768px) {
 
-    #invoice-capture,
-    #prescription-capture {
-        width: 100%;
-        padding: 20px;
+.back-btn:hover{
+    background:rgba(0,212,255,0.1);
+}
+
+@media (max-width:768px){
+
+    .container{
+        padding:25px;
     }
 
-    .header {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
-
-    .logo {
-        max-width: 70px;
+    .form-grid{
+        grid-template-columns:1fr;
     }
 
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
 <a href="centrum.html" class="back-btn">⬅ POWRÓT DO CENTRUM</a>
 
+<div class="logo-container">
+    <img src="obraz_2026-05-02_212208153.png" alt="MedWest Logo">
+</div>
+
 <h1>💊 RECEPTA MEDYCZNA</h1>
 
-    <div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;">
-<div class="section">
-<label>Pacjent</label>
-<input type="text" id="patient">
-</div> 
+<div class="form-grid">
 
-        <div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;">
-<div class="section">
-<label>Lekarz</label>
-<input type="text" id="doctor">
-</div> 
-
-<div class="section">
-<label>Lek</label>
-<select id="medicine">
-
-<optgroup label="💊 Leki przeciwbólowe">
-    <option>Paracetamol</option>
-    <option>Ibuprofen</option>
-    <option>Aspirin</option>
-    <option>Morphine</option>
-</optgroup>
-
-<optgroup label="🦠 Antybiotyki">
-    <option>Amoxicillin</option>
-    <option>Azithromycin</option>
-    <option>Doxycycline</option>
-</optgroup>
-
-<optgroup label="🧠 Psychiatryczne">
-    <option>Diazepam</option>
-    <option>Sertraline</option>
-    <option>Escitalopram</option>
-</optgroup>
-
-<optgroup label="❤️ Kardiologiczne">
-    <option>Nitroglycerin</option>
-    <option>Warfarin</option>
-</optgroup>
-
-<optgroup label="🚑 Ratunkowe">
-    <option>Epinephrine</option>
-    <option>Saline IV</option>
-    <option>Ketamine</option>
-</optgroup>
-
-</select>
-</div>
-
-<div class="section">
-<label>Dawkowanie</label>
-<input type="text" id="dosage" placeholder="np. 1 tabletka co 8 godzin">
-</div>
-<div class="section">
-<label>Ilość opakowań</label>
-
-<input type="number"
-       id="packs"
-       value="1"
-       min="1"
-       max="10">
-</div>
-<div class="section">
-<label>Czas terapii</label>
-<input type="text" id="duration" placeholder="np. 7 dni">
-</div>
-<div class="section">
-<label>Typ recepty</label>
-
-<select id="priority">
-
-<option>Standardowa</option>
-
-<option>Pilna</option>
-
-<option>Kontynuacja leczenia</option>
-
-</select>
-</div>
     <div class="section">
-<label>Ważność recepty</label>
+        <label>Pacjent</label>
+        <input type="text" id="patient">
+    </div>
 
-<select id="validity">
+    <div class="section">
+        <label>Lekarz</label>
+        <input type="text" id="doctor">
+    </div>
 
-<option>7 dni</option>
+    <div class="section">
+        <label>Lek</label>
 
-<option>14 dni</option>
+        <select id="medicine">
 
-<option>30 dni</option>
+            <optgroup label="💊 Leki przeciwbólowe">
+                <option>Paracetamol</option>
+                <option>Ibuprofen</option>
+                <option>Aspirin</option>
+                <option>Morphine</option>
+            </optgroup>
 
-<option>90 dni</option>
+            <optgroup label="🦠 Antybiotyki">
+                <option>Amoxicillin</option>
+                <option>Azithromycin</option>
+                <option>Doxycycline</option>
+            </optgroup>
 
-</select>
+            <optgroup label="🧠 Psychiatryczne">
+                <option>Diazepam</option>
+                <option>Sertraline</option>
+                <option>Escitalopram</option>
+            </optgroup>
+
+            <optgroup label="❤️ Kardiologiczne">
+                <option>Nitroglycerin</option>
+                <option>Warfarin</option>
+            </optgroup>
+
+            <optgroup label="🚑 Ratunkowe">
+                <option>Epinephrine</option>
+                <option>Saline IV</option>
+                <option>Ketamine</option>
+            </optgroup>
+
+        </select>
+    </div>
+
+    <div class="section">
+        <label>Dawkowanie</label>
+        <input type="text" id="dosage" placeholder="np. 1 tabletka co 8 godzin">
+    </div>
+
+    <div class="section">
+        <label>Ilość opakowań</label>
+        <input type="number" id="packs" value="1" min="1" max="10">
+    </div>
+
+    <div class="section">
+        <label>Czas terapii</label>
+        <input type="text" id="duration" placeholder="np. 7 dni">
+    </div>
+
+    <div class="section">
+        <label>Typ recepty</label>
+
+        <select id="priority">
+            <option>Standardowa</option>
+            <option>Pilna</option>
+            <option>Kontynuacja leczenia</option>
+        </select>
+    </div>
+
+    <div class="section">
+        <label>Ważność recepty</label>
+
+        <select id="validity">
+            <option>7 dni</option>
+            <option>14 dni</option>
+            <option selected>30 dni</option>
+            <option>90 dni</option>
+        </select>
+    </div>
+
+    <div class="section full">
+
+        <label>Gotowe zalecenia</label>
+
+        <select id="preset-notes" onchange="applyPresetNotes()">
+
+            <option value="">Wybierz zalecenie...</option>
+
+            <option value="Przyjmować po posiłku.">
+                Przyjmować po posiłku
+            </option>
+
+            <option value="Nie spożywać alkoholu podczas terapii.">
+                Zakaz spożywania alkoholu
+            </option>
+
+            <option value="Unikać prowadzenia pojazdów.">
+                Nie prowadzić pojazdów
+            </option>
+
+            <option value="Zgłosić się na kontrolę za 7 dni.">
+                Kontrola za 7 dni
+            </option>
+
+            <option value="Przechowywać poza zasięgiem dzieci.">
+                Chronić przed dziećmi
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="section full">
+        <label>Zalecenia</label>
+        <textarea id="notes"></textarea>
+    </div>
+
+    <div class="section full">
+
+        <button class="btn" onclick="generatePrescription()">
+            GENERUJ RECEPTĘ
+        </button>
+
+    </div>
+
 </div>
-    
-<select id="preset-notes" class="data-input"
-        onchange="applyPresetNotes()">
-
-    <option value="">Wybierz zalecenie...</option>
-
-    <option value="Przyjmować po posiłku.">
-        Przyjmować po posiłku
-    </option>
-
-    <option value="Nie spożywać alkoholu podczas terapii.">
-        Zakaz spożywania alkoholu
-    </option>
-
-    <option value="Unikać prowadzenia pojazdów.">
-        Nie prowadzić pojazdów
-    </option>
-
-    <option value="Zgłosić się na kontrolę za 7 dni.">
-        Kontrola za 7 dni
-    </option>
-
-    <option value="Przechowywać poza zasięgiem dzieci.">
-        Chronić przed dziećmi
-    </option>
-
-</select>
-<div class="section">
-<label>Zalecenia</label>
-<textarea id="notes"></textarea>
-</div>
-
-<button class="btn" onclick="generatePrescription()">
-GENERUJ RECEPTĘ
-</button>
 
 </div>
 
@@ -283,45 +287,47 @@ GENERUJ RECEPTĘ
 
 function generatePrescription(){
 
-localStorage.setItem('lastPrescription', JSON.stringify({
+    localStorage.setItem('lastPrescription', JSON.stringify({
 
-patient: document.getElementById('patient').value || 'NIEZNANY',
+        patient: document.getElementById('patient').value || 'NIEZNANY',
 
-doctor: document.getElementById('doctor').value || 'LEKARZ DYŻURNY',
+        doctor: document.getElementById('doctor').value || 'LEKARZ DYŻURNY',
 
-medicine: document.getElementById('medicine').value,
+        medicine: document.getElementById('medicine').value,
 
-dosage: document.getElementById('dosage').value,
+        dosage: document.getElementById('dosage').value,
 
-packs: document.getElementById('packs').value,
+        packs: document.getElementById('packs').value,
 
-priority: document.getElementById('priority').value,
+        priority: document.getElementById('priority').value,
 
-validity: document.getElementById('validity').value,
+        validity: document.getElementById('validity').value,
 
-duration: document.getElementById('duration').value,
+        duration: document.getElementById('duration').value,
 
-notes: document.getElementById('notes').value,
+        notes: document.getElementById('notes').value,
 
-date: new Date().toLocaleString()
+        date: new Date().toLocaleString()
 
-}));
+    }));
 
-window.location.href = "recepta_wydruk.html";
+    window.location.href = "recepta_wydruk.html";
 
 }
-function applyPresetNotes() {
+
+function applyPresetNotes(){
 
     const preset =
         document.getElementById('preset-notes').value;
 
-    if (preset !== "") {
+    if(preset !== ""){
 
         document.getElementById('notes').value = preset;
 
     }
 
 }
+
 </script>
 
 </body>
