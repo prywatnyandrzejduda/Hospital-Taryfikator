@@ -279,7 +279,18 @@ date: new Date().toLocaleString()
 window.location.href = "recepta_wydruk.html";
 
 }
+function applyPresetNotes() {
 
+    const preset =
+        document.getElementById('preset-notes').value;
+
+    if (preset !== "") {
+
+        document.getElementById('notes').value = preset;
+
+    }
+
+}
 </script>
 
 </body>
