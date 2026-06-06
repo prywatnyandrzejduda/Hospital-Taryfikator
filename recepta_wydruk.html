@@ -200,7 +200,34 @@ body{
 </div>
 
 <div class="box">
+<label>Gotowe zalecenia</label>
 
+<select id="preset-notes" class="data-input"
+        onchange="applyPresetNotes()">
+
+    <option value="">Wybierz zalecenie...</option>
+
+    <option value="Przyjmować po posiłku.">
+        Przyjmować po posiłku
+    </option>
+
+    <option value="Nie spożywać alkoholu podczas terapii.">
+        Zakaz spożywania alkoholu
+    </option>
+
+    <option value="Unikać prowadzenia pojazdów.">
+        Nie prowadzić pojazdów
+    </option>
+
+    <option value="Zgłosić się na kontrolę za 7 dni.">
+        Kontrola za 7 dni
+    </option>
+
+    <option value="Przechowywać poza zasięgiem dzieci.">
+        Chronić przed dziećmi
+    </option>
+
+</select>
 <strong>ZALECENIA LEKARSKIE:</strong>
 
 <br><br>
@@ -300,7 +327,18 @@ alert("Nie udało się skopiować obrazu.");
 });
 
 }
+function applyPresetNotes() {
 
+    const preset =
+        document.getElementById('preset-notes').value;
+
+    if (preset !== "") {
+
+        document.getElementById('notes').value = preset;
+
+    }
+
+}
 </script>
 
 </body>
